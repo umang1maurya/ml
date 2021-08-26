@@ -1,10 +1,8 @@
 import urllib.request
-import re
 
 #String data.
-#url="http://google.com"
+url="http://uietkanpur.com"
 html_data=urllib.request.urlopen(url).read().decode('utf-8')
-string_data=re.compile(r'<[^>]+>').sub('', html_data)
 
 #data
 list_word=[]
@@ -27,14 +25,21 @@ def match_seperator(value):
 
 def differtiate_word():
     last=""
-    for x in string_data:
-        if(match_seperator(x)):
-            if(len(last)):
-                match_string(last)
-            last=""
+    keep=False
+    for x in html_data:
+        if(keep):
+            if x=='>': 
+                keep= False
         else:
-            last+=x 
-    
+            if x=='<':
+                keep=True 
+            else:
+                if match_seperator(x):
+                    if len(last)>1 :
+                        match_string(last)
+                    last=""
+                else:
+                    last+=x
     if(len(last)):
         match_string(last)
 
