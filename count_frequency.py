@@ -1,7 +1,7 @@
 import urllib.request
 
 #String data.
-url="http://uietkanpur.com"
+url="http://google.com"
 html_data=urllib.request.urlopen(url).read().decode('utf-8')
 
 #data
